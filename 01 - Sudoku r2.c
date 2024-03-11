@@ -92,14 +92,12 @@ bool validaLinhaColunaBloco(int matriz[TAMANHO][TAMANHO], int linha, int coluna,
 bool validaSudoku(int matriz[TAMANHO][TAMANHO]) {
     for (int linha = 0; linha < TAMANHO; linha++) {
         for (int coluna = 0; coluna < TAMANHO; coluna++) {
-            if (matriz[linha][coluna] != 0) {
-                int num = matriz[linha][coluna];
-                matriz[linha][coluna] = 0;
-                if (!validaLinhaColunaBloco(matriz, linha, coluna, num)) {
-                    return false;
-                }
-                matriz[linha][coluna] = num;
+            int num = matriz[linha][coluna];
+            matriz[linha][coluna] = 0;
+            if (!validaLinhaColunaBloco(matriz, linha, coluna, num)) {
+                return false;
             }
+            matriz[linha][coluna] = num;
         }
     }
     return true;
