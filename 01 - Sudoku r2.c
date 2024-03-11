@@ -1,3 +1,18 @@
+/*
+    Programa lÃª inicialmente um nÃºmero n > 0 de
+    matrizes na entrada. Nas linhas seguintes devem ser
+    dadas as n matrizes. Cada matriz Ã© dada em 9 linhas,
+    em que cada linha contÃ©m 9 nÃºmeros inteiros, separados
+    por um espaÃ§o.
+
+    Como saÃ­da, o programa imprime para cada instancia
+    um conjunto de 3 linhas: a primeira diz "Instancia k",
+    onde k Ã© o nÃºmero de cada instÃ¢ncia. A segunda linha
+    diz "SIM" se a matriz for a soluÃ§Ã£o de um problema de
+    Sudoku, e "NAO" caso contrÃ¡rio. Na terceira linha o
+    programa imprime uma linha em branco.
+*/
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -14,22 +29,6 @@ bool validaLinhaColunaBloco(int matriz[TAMANHO][TAMANHO], int linha, int coluna,
 bool validaSudoku(int matriz[TAMANHO][TAMANHO]);
 
 int main() {
-
-    /*
-    Programa lê inicialmente um número n > 0 de
-    matrizes na entrada. Nas linhas seguintes devem ser
-    dadas as n matrizes. Cada matriz é dada em 9 linhas,
-    em que cada linha contém 9 números inteiros, separados
-    por um espaço.
-
-    Como saída, o programa imprime para cada instancia
-    um conjunto de 3 linhas: a primeira diz "Instancia k",
-    onde k é o número de cada instância. A segunda linha
-    diz "SIM" se a matriz for a solução de um problema de
-    Sudoku, e "NAO" caso contrário. Na terceira linha o
-    programa imprime uma linha em branco.
-    */
-
     int n;
     scanf("%d", &n);
 
@@ -42,7 +41,6 @@ int main() {
                 scanf("%d", &matriz[i][j]);
             }
         }
-
         results[k] = validaSudoku(matriz);
     }
 
