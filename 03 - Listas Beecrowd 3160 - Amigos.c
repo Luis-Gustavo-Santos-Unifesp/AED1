@@ -90,7 +90,7 @@ struct Node* findNode(struct Node* head, char* name){
 void printList(struct Node *node){
   while (node != NULL){
     printf("%s", node->name);
-    if (node->next != NULL) // Se não for o último nó, imprime um espaço
+    if (node->next != NULL) // Se nÃ£o for o Ãºltimo nÃ³, imprime um espaÃ§o
       printf(" ");
     node = node->next;
   }
