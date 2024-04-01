@@ -1,12 +1,12 @@
 /*
-Programa que gerencia uma lista encadeada.
+Programa que resolve o problema 3160 do Beecrowd usando listas 
+encadeadas.
 */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #define MAX 15
-
 int primeiro = 0;
 
 struct Node {
@@ -21,81 +21,11 @@ struct Node* newNode(char* name){
   return node;
 }
 
-void append(struct Node** head_ref, char* name){
-  // Remover qualquer nova linha (\n) do final do nome
-  name[strcspn(name, "\n")] = 0;
-
-  struct Node* new_node = newNode(name);
-  struct Node *last = *head_ref;
-
-  if (*head_ref == NULL){
-    *head_ref = new_node;
-    return;
-  }
-
-  while (last->next != NULL)
-    last = last->next;
-
-  last->next = new_node;
-  return;
-}
-
-void mergeLists(struct Node** list1, struct Node* list2){
-  if (*list1 == NULL){
-    *list1 = list2;
-    return;
-  }
-
-  struct Node* last = *list1;
-  while (last->next != NULL){
-    last = last->next;
-  }
-  last->next = list2;
-}
-
-void mergeFound(struct Node** found, struct Node* list1, struct Node* list2){
-  if (primeiro == 1){
-    //primeiro = 1;
-    mergeLists(&list2, list1);
-    return;
-  }
-  struct Node* last = *found;
-  struct Node* rest = last->next;
-  last->next = list2;
-  while (list2->next != NULL){
-    list2 = list2->next;
-  }
-  list2->next = rest;
-}
-
-struct Node* findNode(struct Node* head, char* name){
-  struct Node* prior = head;
-  int count = 0;
-  while(head != NULL){
-    //head = head->next;
-    if (strcmp(head->name, name) == 0){
-      //printf("%s %s" , head->name, name);
-      head = prior;
-      if(!count) primeiro = 1;
-      else if (count == 1) primeiro = 2;
-      return head;
-    }
-    prior = head;
-    head = head->next;
-    count++;
-  }
-  return NULL;
-}
-
-void printList(struct Node *node){
-  while (node != NULL){
-    printf("%s", node->name);
-    if (node->next != NULL) // Se não for o último nó, imprime um espaço
-      printf(" ");
-    node = node->next;
-  }
-  printf("\n"); // Imprime uma nova linha no final da lista
-}
+void append(struct Node** head_ref, char* name);
+void mergeLists(struct Node** list1, struct Node* list2);
+void mergeFound(struct Node** found, struct Node* list1, struct Node* list2);
+struct Node* findNode(struct Node* head, char* name);
+void printList(struct Node *node);
 
 int main(void){
   char line[500], line2[500], name[50];
@@ -131,4 +61,76 @@ int main(void){
   (!primeiro || primeiro == 2) ? printList(head) : printList(head2);
 
   return 0;
+}
+
+void append(struct Node** head_ref, char* name){
+  name[strcspn(name, "\n")] = 0;
+
+  struct Node* new_node = newNode(name);
+  struct Node *last = *head_ref;
+
+  if (*head_ref == NULL){
+    *head_ref = new_node;
+    return;
+  }
+
+  while (last->next != NULL)
+    last = last->next;
+
+  last->next = new_node;
+  return;
+}
+
+void mergeLists(struct Node** list1, struct Node* list2){
+  if (*list1 == NULL){
+    *list1 = list2;
+    return;
+  }
+
+  struct Node* last = *list1;
+  while (last->next != NULL){
+    last = last->next;
+  }
+  last->next = list2;
+}
+
+void mergeFound(struct Node** found, struct Node* list1, struct Node* list2){
+  if (primeiro == 1){
+    mergeLists(&list2, list1);
+    return;
+  }
+  struct Node* last = *found;
+  struct Node* rest = last->next;
+  last->next = list2;
+  while (list2->next != NULL){
+    list2 = list2->next;
+  }
+  list2->next = rest;
+}
+
+struct Node* findNode(struct Node* head, char* name){
+  struct Node* prior = head;
+  int count = 0;
+  while(head != NULL){
+    if (strcmp(head->name, name) == 0){
+      head = prior;
+      if(!count) primeiro = 1;
+      else if (count == 1) primeiro = 2;
+      return head;
+    }
+    prior = head;
+    head = head->next;
+    count++;
+  }
+  return NULL;
+}
+
+void printList(struct Node *node){
+  while (node != NULL){
+    printf("%s", node->name);
+    if (node->next != NULL)
+      printf(" ");
+    node = node->next;
+  }
+  printf("\n");
 }
