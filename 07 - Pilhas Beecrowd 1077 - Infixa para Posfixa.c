@@ -3,7 +3,7 @@
 #include <string.h>
 #define TAMANHO_MAXIMO 300
 
-// Estrutura de nó da pilha
+// Estrutura de nÃ³ da pilha
 typedef struct No {
     char dado;
     struct No* prox;
@@ -14,21 +14,21 @@ typedef struct {
     No* topo;
 } Pilha;
 
-// Inicialização da pilha
+// InicializaÃ§Ã£o da pilha
 void inicializar(Pilha* p) {
     p->topo = NULL;
 }
 
-// Verifica se a pilha está vazia
+// Verifica se a pilha estÃ¡ vazia
 int estaVazia(Pilha* p) {
     return p->topo == NULL;
 }
 
-// Função para empilhar um elemento
+// FunÃ§Ã£o para empilhar um elemento
 void empilhar(Pilha* p, char valor) {
     No* novoNo = (No*)malloc(sizeof(No));
     if (novoNo == NULL) {
-        printf("Erro ao alocar memória.\n");
+        printf("Erro ao alocar memÃ³ria.\n");
         exit(EXIT_FAILURE);
     }
     novoNo->dado = valor;
@@ -36,7 +36,7 @@ void empilhar(Pilha* p, char valor) {
     p->topo = novoNo;
 }
 
-// Função para desempilhar um elemento
+// FunÃ§Ã£o para desempilhar um elemento
 char desempilhar(Pilha* p) {
     if (estaVazia(p)) {
         printf("Subfluxo de pilha\n");
@@ -49,7 +49,7 @@ char desempilhar(Pilha* p) {
     return valor;
 }
 
-// Função para obter o topo da pilha sem removê-lo
+// FunÃ§Ã£o para obter o topo da pilha sem removÃª-lo
 char topo(Pilha* p) {
     if (estaVazia(p)) {
         printf("Subfluxo de pilha\n");
@@ -58,12 +58,12 @@ char topo(Pilha* p) {
     return p->topo->dado;
 }
 
-// Função que verifica se um caractere é um operador
+// FunÃ§Ã£o que verifica se um caractere Ã© um operador
 int ehOperador(char c) {
     return (c == '+' || c == '-' || c == '*' || c == '/' || c == '^');
 }
 
-// Função que verifica a precedência dos operadores
+// FunÃ§Ã£o que verifica a precedÃªncia dos operadores
 int precedencia(char c) {
     if (c == '+' || c == '-')
         return 1;
@@ -74,7 +74,7 @@ int precedencia(char c) {
     return -1;
 }
 
-// Função para converter expressão infix para postfix
+// FunÃ§Ã£o para converter expressÃ£o infix para postfix
 void infixParaPostfix(char *expressao, char *resultado) {
     Pilha pilha;
     inicializar(&pilha);
@@ -85,7 +85,7 @@ void infixParaPostfix(char *expressao, char *resultado) {
     for (int i = 0; i < tamanho; i++) {
         char atual = expressao[i];
 
-        if (isalnum(atual)) { // Se for uma letra ou número
+        if (isalnum(atual)) { // Se for uma letra ou nÃºmero
             resultado[j++] = atual;
         } else if (atual == '(') {
             empilhar(&pilha, atual);
@@ -94,7 +94,7 @@ void infixParaPostfix(char *expressao, char *resultado) {
                 resultado[j++] = desempilhar(&pilha);
             }
             if (!estaVazia(&pilha) && topo(&pilha) != '(') {
-                printf("Expressão inválida\n");
+                printf("ExpressÃ£o invÃ¡lida\n");
                 exit(EXIT_FAILURE);
             } else {
                 desempilhar(&pilha);
@@ -118,9 +118,9 @@ void infixParaPostfix(char *expressao, char *resultado) {
 int main() {
     int N;
     scanf("%d", &N);
-    getchar(); // Para consumir a quebra de linha após N
+    getchar(); // Para consumir a quebra de linha apÃ³s N
 
-    char resultados[N][TAMANHO_MAXIMO]; // Definindo tamanho do array de resultados de acordo com o número de casos de teste
+    char resultados[N][TAMANHO_MAXIMO]; // Definindo tamanho do array de resultados de acordo com o nÃºmero de casos de teste
 
     for (int i = 0; i < N; i++) {
         char expressao[TAMANHO_MAXIMO];
